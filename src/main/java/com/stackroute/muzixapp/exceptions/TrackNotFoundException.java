@@ -1,0 +1,15 @@
+package com.stackroute.muzixapp.exceptions;
+
+public class TrackNotFoundException extends Exception{
+
+    private String message;
+
+    private TrackNotFoundException() {
+
+    }
+
+    public TrackNotFoundException(String message) {
+        super(message);
+        this.message = message;
+    }
+}
