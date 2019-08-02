@@ -1,0 +1,1 @@
+Used ApplicationListener<ContextRefreshedEvent> and CommandLineRunner.
