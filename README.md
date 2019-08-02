@@ -1,0 +1,1 @@
+Used Swagger 2.
