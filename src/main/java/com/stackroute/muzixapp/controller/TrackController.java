@@ -19,23 +19,21 @@ import java.util.List;
 public class TrackController {
 
 	@Autowired
-	TrackService trackService;
+	private TrackService trackService;
 
-	public TrackController(TrackService trackService) {
-		this.trackService = trackService;
-	}
+	
 
 	//update all the methods with code
 	@PostMapping("track")
-	public ResponseEntity<?> addTrack(@RequestBody Track track) throws TrackAlreadyExistsException {
+	public ResponseEntity<?> addTrack(@RequestBody Track track) throws TrackAlreadyExistsException,Exception {
 		ResponseEntity responseEntity;
 		trackService.saveTrack(track);
-		responseEntity = new ResponseEntity<String>("Succesfully Created", HttpStatus.OK);
+		responseEntity = new ResponseEntity<Track>(track, HttpStatus.OK);
 		return responseEntity;
 	}
 
 	@GetMapping("track")
-	public ResponseEntity<?> indexPage(ModelMap model) {
+	public ResponseEntity<?> indexPage(ModelMap model) throws exception {
 		ResponseEntity responseEntity;
 		List<Track> trackList = trackService.getAllTracks();
 		model.addAttribute("trackList", trackList);
@@ -52,16 +50,25 @@ public class TrackController {
 		return responseEntity;
 	}
 
+	@GetMapping("tracks/{id}")
+	public ResponseEntity<?> getTrackById(@PathVariable(value = "id") Integer id, ModelMap model) throws TrackNotFoundException,Exception {
+		ResponseEntity responseEntity;
+		List<Track> trackList = trackService.getTrackById(id);
+		model.addAttribute("trackList", trackList);
+		responseEntity = new ResponseEntity<List<Track>>(trackList, HttpStatus.OK);
+		return responseEntity;
+	}
+
 	@DeleteMapping("track/{id}")
-	public ResponseEntity<?> deleteTrack(@PathVariable(name = "id") int id) throws TrackNotFoundException {
+	public ResponseEntity<?> deleteTrack(@PathVariable(name = "id") int id) throws TrackNotFoundException,Exception {
 		ResponseEntity responseEntity;
 		trackService.deleteTrack(id);
-		responseEntity = new ResponseEntity<String>("Succesfully Deleted", HttpStatus.OK);
+		responseEntity = new ResponseEntity<Track>(track, HttpStatus.OK);
 		return responseEntity;
 	}
 
 	@PutMapping("track/{id}")
-	public ResponseEntity<?> updateTrack(@PathVariable(name = "id") int id, @RequestBody Track track) throws TrackNotFoundException {
+	public ResponseEntity<?> updateTrack(@PathVariable(name = "id") int id, @RequestBody Track track) throws TrackNotFoundException,Exception {
 		ResponseEntity responseEntity;
 		trackService.updateTrack(track);
 		responseEntity = new ResponseEntity<Track>(track, HttpStatus.OK);
