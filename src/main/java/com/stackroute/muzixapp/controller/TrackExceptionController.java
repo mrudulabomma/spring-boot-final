@@ -18,4 +18,8 @@ public class TrackExceptionController {
         public ResponseEntity<Object> exception(TrackNotFoundException exception) {
             return new ResponseEntity<>("Track not found", HttpStatus.NOT_FOUND);
         }
+         @ExceptionHandler(value = Exception.class)
+        public ResponseEntity<Object> exception(Exception exception) {
+            return new ResponseEntity<>("Exception Occurs", HttpStatus.NOT_FOUND);
+        }
 }
