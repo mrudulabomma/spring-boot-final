@@ -9,16 +9,16 @@ import com.stackroute.muzixapp.model.Track;
 
 public interface TrackService {
 
-	public Track saveTrack(Track track) throws TrackAlreadyExistsException;
+	 Track saveTrack(Track track) throws TrackAlreadyExistsException;
 
-	public boolean deleteTrack(int id) throws TrackNotFoundException;
+	 boolean deleteTrack(int id) throws TrackNotFoundException;
 
-	public List<Track> getAllTracks();
+	 List<Track> getAllTracks();
 
-	public Track getTrackById(int id) throws TrackNotFoundException;
+	 Track getTrackById(int id) throws TrackNotFoundException;
 
-	public boolean updateTrack(Track track) throws TrackNotFoundException;
+	 boolean updateTrack(Track track) throws TrackNotFoundException;
 
-	public List<Track> findByName(String Name) throws TrackNotFoundException;
+	 List<Track> findByName(String Name) throws TrackNotFoundException;
 
 }
