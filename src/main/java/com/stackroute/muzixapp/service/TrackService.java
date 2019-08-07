@@ -7,7 +7,7 @@ import com.stackroute.muzixapp.model.Track;
 
 public interface TrackService {
 
-	public boolean saveTrack(Track track);
+	public Track saveTrack(Track track);
 
 	public boolean deleteTrack(int id);
 
