@@ -18,14 +18,15 @@ public class TrackServiceImpl implements TrackService {
 	}
 
 	@Override
-	public boolean saveTrack(Track track) {
-		boolean result = false;
-		Track savedTrack = trackRepository.save(track);
-		if(savedTrack != null) {
-			result = true;
-		}
-		return result;
+	public Track saveTrack(Track track)  {
+		Track savedTrack = null;
+		
+	   savedTrack = trackRepository.save(track);
+
+		
+		return savedTrack;
 	}
+
 
 	@Override
 	public boolean deleteTrack(int id) {
