@@ -34,7 +34,7 @@ public class TrackServiceImpl implements TrackService {
 	}
 
 	@Override
-	public Track saveTrack(Track track) throws TrackAlreadyExistsException {
+	public Track saveTrack(Track track) throws TrackAlreadyExistsException,Exception {
 		Track savedTrack = null;
 		if(!trackRepository.findById(track.getId()).isPresent()) {
 			savedTrack = trackRepository.save(track);
@@ -46,7 +46,7 @@ public class TrackServiceImpl implements TrackService {
 	}
 
 	@Override
-	public boolean deleteTrack(int id) throws TrackNotFoundException {
+	public boolean deleteTrack(int id) throws TrackNotFoundException,Exception {
 		boolean result = false;
 		if(!trackRepository.findById(id).isPresent()) {
 			throw new TrackNotFoundException();
@@ -59,19 +59,19 @@ public class TrackServiceImpl implements TrackService {
 	}
 
 	@Override
-	public List<Track> getAllTracks() {
+	public List<Track> getAllTracks() throws Exception {
 		return trackRepository.findAll();
 	}
 
 	@Override
-	public List<Track> findByName(String name) throws TrackNotFoundException {
+	public List<Track> findByName(String name) throws TrackNotFoundException,Exception {
 		if(!(trackRepository.findByName(name).size() > 0))
 			throw new TrackNotFoundException();
 		return trackRepository.findByName(name);
 	}
 
 	@Override
-	public Track getTrackById(int id) throws TrackNotFoundException {
+	public Track getTrackById(int id) throws TrackNotFoundException,Exception {
 		Query query = new Query();
 		query.addCriteria(Criteria.where("_id").is(id));
 		Track savedTrack = mongoTemplate.findOne(query, Track.class);
@@ -82,7 +82,7 @@ public class TrackServiceImpl implements TrackService {
 	}
 
 	@Override
-	public boolean updateTrack(Track track) throws TrackNotFoundException {
+	public boolean updateTrack(Track track) throws TrackNotFoundException,Exception {
 		boolean result = false;
 		if(trackRepository.findById(track.getId()).isPresent()) {
 			trackRepository.save(track);
