@@ -18,10 +18,7 @@ public class TrackController {
 	@Autowired
 	TrackService trackService;
 
-	public TrackController(TrackService trackService) {
-		this.trackService = trackService;
-	}
-
+	
 	//update all the methods with code
 	@PostMapping("track")
 	public ResponseEntity<?> addTrack(@RequestBody Track track) {
