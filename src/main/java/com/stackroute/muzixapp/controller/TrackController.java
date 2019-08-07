@@ -21,16 +21,14 @@ public class TrackController {
 	@Autowired
 	TrackService trackService;
 
-	public TrackController(TrackService trackService) {
-		this.trackService = trackService;
-	}
+	
 
 	//update all the methods with code
 	@PostMapping("track")
 	public ResponseEntity<?> addTrack(@RequestBody Track track) throws TrackAlreadyExistsException {
 		ResponseEntity responseEntity;
 		trackService.saveTrack(track);
-		responseEntity = new ResponseEntity<String>("Succesfully Created", HttpStatus.CREATED);
+		responseEntity = new ResponseEntity<Track>(track, HttpStatus.CREATED);
 		return responseEntity;
 	}
 
@@ -51,12 +49,21 @@ public class TrackController {
 		responseEntity = new ResponseEntity<List<Track>>(trackList, HttpStatus.OK);
 		return responseEntity;
 	}
+	@GetMapping("tracks/{id}")
+	public ResponseEntity<?> findById(@PathVariable(value = "id") int id, ModelMap model) {
+		ResponseEntity responseEntity;
+		List<Track> trackList = trackService.findById(id);
+		model.addAttribute("trackList", trackList);
+		responseEntity = new ResponseEntity<List<Track>>(trackList, HttpStatus.OK);
+		return responseEntity;
+	}
+
 
 	@DeleteMapping("track/{id}")
 	public ResponseEntity<?> deleteTrack(@PathVariable(name = "id") int id) throws TrackNotFoundException {
 		ResponseEntity responseEntity;
 		trackService.deleteTrack(id);
-		responseEntity = new ResponseEntity<String>("Succesfully Deleted", HttpStatus.OK);
+		responseEntity = new ResponseEntity<Track>(track, HttpStatus.OK);
 		return responseEntity;
 	}
 
