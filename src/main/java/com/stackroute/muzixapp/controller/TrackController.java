@@ -50,12 +50,12 @@ public class TrackController {
 		return responseEntity;
 	}
 
-	@GetMapping("tracks/{id}")
+	@GetMapping("track/id/{id}")
 	public ResponseEntity<?> getTrackById(@PathVariable(value = "id") Integer id, ModelMap model) throws TrackNotFoundException,Exception {
 		ResponseEntity responseEntity;
-		List<Track> trackList = trackService.getTrackById(id);
-		model.addAttribute("trackList", trackList);
-		responseEntity = new ResponseEntity<List<Track>>(trackList, HttpStatus.OK);
+		Track track = trackService.getTrackById(id);
+		model.addAttribute("track", track);
+		responseEntity = new ResponseEntity<Track>(track, HttpStatus.OK);
 		return responseEntity;
 	}
 
